@@ -13,7 +13,7 @@ module VestalVersions
       return [] if from_number.nil? || to_number.nil?
 
       condition = (from_number == to_number) ? to_number : Range.new(*[from_number, to_number].sort)
-      all(
+      unscoped.all(
         :conditions => {:number => condition},
         :order => "#{aliased_table_name}.number #{(from_number > to_number) ? 'DESC' : 'ASC'}"
       )
